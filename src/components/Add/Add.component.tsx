@@ -1,7 +1,5 @@
+import { Button, Input, Space } from "antd";
 import { useCallback, useState } from "react";
-import UButton from "../UI/UButton/UButton.component";
-import UInput from "../UI/UInput/UInput.component";
-import "./Add.scss";
 
 export interface IAdd {
   add: (text: string) => void;
@@ -9,6 +7,12 @@ export interface IAdd {
 
 function Add({ add }: IAdd) {
   const [getValue, setValue] = useState<string>("");
+
+  const onChangeInput = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setValue(e.target.value);
+  };
 
   const onClick = useCallback(() => {
     if (getValue) {
@@ -18,10 +22,16 @@ function Add({ add }: IAdd) {
   }, [add, getValue]);
 
   return (
-    <div className="add">
-      <UInput getValue={getValue} setValue={setValue} />
-      <UButton text="Add ToDo" onClick={onClick} />
-    </div>
+    <Space.Compact style={{ width: "100%" }}>
+      <Input
+        value={getValue}
+        onChange={onChangeInput}
+        placeholder="Enter ToDo"
+      />
+      <Button type="primary" onClick={onClick}>
+        Add ToDo
+      </Button>
+    </Space.Compact>
   );
 }
 

@@ -1,0 +1,12 @@
+.view-all {
+    margin-bottom: 10px;
+
+    &__text {
+        margin-left: 10px;
+    }
+}
+
+.todo-container {
+    display: flex;
+    justify-content: space-between;
+}
