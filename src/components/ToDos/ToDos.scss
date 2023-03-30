@@ -9,4 +9,8 @@
 .todo-container {
     display: flex;
     justify-content: space-between;
+
+    .styled-tag {
+        color: #1677ff;
+    }
 }

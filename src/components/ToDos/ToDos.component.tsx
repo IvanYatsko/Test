@@ -12,20 +12,24 @@ export interface IToDos {
   onChangeToDo: (changeToDo: string, oldToDo: string) => void;
 }
 
-function ToDos({
+const ToDos: React.FC<IToDos> = ({
   todos,
   checkedVisibleToDo,
   onChangeVisibleToDo,
   deleteToDo,
   onChangeToDo,
-}: IToDos) {
+}: IToDos) => {
   const [editToDo, setEditToDo] = useState<boolean>(false);
   const [editToDoText, setEditToDoText] = useState<string>("");
   const [editText, setEditText] = useState<string>("");
 
   const changeToDo = (todo: string) => {
     setEditToDo((prev) => !prev);
-    setEditToDoText(todo);
+    setEditToDoText(
+      todo
+        .replace(/(<span class="styled-tag">)/g, "#")
+        .replace(/(<\/span>)/g, "")
+    );
     setEditText(todo);
   };
 
@@ -60,7 +64,7 @@ function ToDos({
               </Space.Compact>
             ) : (
               <>
-                <div>{item.text}</div>
+                <div dangerouslySetInnerHTML={{ __html: item.text }} />
                 <div>
                   <Button
                     type="link"
@@ -80,6 +84,6 @@ function ToDos({
       />
     </>
   );
-}
+};
 
 export default ToDos;

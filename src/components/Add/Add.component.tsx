@@ -5,7 +5,7 @@ export interface IAdd {
   add: (text: string) => void;
 }
 
-function Add({ add }: IAdd) {
+const Add: React.FC<IAdd> = ({ add }: IAdd) => {
   const [getValue, setValue] = useState<string>("");
 
   const onChangeInput = (
@@ -33,6 +33,6 @@ function Add({ add }: IAdd) {
       </Button>
     </Space.Compact>
   );
-}
+};
 
 export default Add;

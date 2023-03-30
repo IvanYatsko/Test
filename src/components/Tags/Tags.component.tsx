@@ -10,7 +10,12 @@ export interface ITags {
   deleteTag: (tag: string) => void;
 }
 
-function Tags({ tags, checkedList, setCheckedList, deleteTag }: ITags) {
+const Tags: React.FC<ITags> = ({
+  tags,
+  checkedList,
+  setCheckedList,
+  deleteTag,
+}: ITags) => {
   const onChange = (list: CheckboxValueType[]) => {
     setCheckedList(list as string[]);
   };
@@ -26,13 +31,17 @@ function Tags({ tags, checkedList, setCheckedList, deleteTag }: ITags) {
           {tags.map((tag) => (
             <Col key={tag} className="col">
               <Checkbox value={tag}>{tag}</Checkbox>
-              <Button type="link" icon={<CloseOutlined />} onClick={() => deleteTag(tag)} />
+              <Button
+                type="link"
+                icon={<CloseOutlined />}
+                onClick={() => deleteTag(tag)}
+              />
             </Col>
           ))}
         </Row>
       </Checkbox.Group>
     </>
   );
-}
+};
 
 export default Tags;
